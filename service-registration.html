@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Serviço</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #B0E0E6; /* Azul claro pastel */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ffcc00; /* Laranja suave */
+            color: rgb(255, 255, 255);
+            text-align: center;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        section {
+            background-color: white;
+            padding: 2.5rem; /* Diminui o padding para reduzir o tamanho da caixa */
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Reduz a largura */
+            max-width: 400px; /* Limita a largura máxima */
+            position: relative;
+        }
+
+        section:before {
+            content: '🐾';
+            font-size: 4rem;
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2 {
+            margin: 0 0 1rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        form div {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #B0E0E6;
+            border-radius: 8px;
+            background-color: #fff7f8;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #80fffb;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #ffcc00; /* Laranja mais vibrante */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f5e23bba;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #000000;
+            color: #ffffff;
+            box-shadow: 0 -2px 4px rgba(233, 232, 232, 0.1);
+        }
+
+        p {
+            text-align: center;
+            margin-top: 1rem;
+            color: #fdfdfd;
+        }
+
+        a {
+            color: #23afe6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Petshop - Registrar Serviço</h1>
+    </header>
+    <main>
+        <section>
+<p></p>
+            <form id="serviceForm">
+                <div>
+                    <label for="nameService">Nome do Serviço</label>
+                    <input type="text" id="nameService" placeholder="Digite o nome do serviço" required> 
+                </div>
+                <div>
+                    <label for="describeService">Descrição do serviço</label>
+                    <textarea id="describeService" placeholder="Digite a descrição do serviço" rows="4" required></textarea>
+                </div>
+                <div>
+                    <label for="priceService">Preço do Serviço</label>
+                    <input type="number" id="priceService" placeholder="Digite o valor do serviço" step="0.01" required>
+                </div>
+                <button type="submit">Cadastrar Serviço</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy;2024 Petshop - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cadastroForm = document.getElementById("serviceForm");
+
+            cadastroForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const nameService = document.querySelector("#nameService").value;
+                const describeService = document.querySelector("#describeService").value;
+                const priceService = document.querySelector("#priceService").value;
+
+                try {
+                    const response = await fetch("http://localhost:8080/api/services", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ nameService, describeService, priceService })
+                    });
+
+                    if (response.ok) {
+                        alert("Serviço cadastrado com sucesso!");
+                        window.location.href = "./index";
+                    } else {
+                        alert("Erro ao cadastrar o serviço. Tente novamente.");
+                    }
+                } catch (error) {
+                    console.error("Erro ao conectar ao servidor:", error);
+                    alert("Erro ao conectar ao servidor. Tente novamente mais tarde.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

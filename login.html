@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Carinhos e Caudas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #B0E0E6; /* Rosa pastel */
+            color: #000000;
+        }
+
+        header {
+            background-color: #ffcc00; /* Laranja suave */
+            color: #fbfafa;
+            text-align: center;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        section {
+            background-color: rgb(255, 255, 255);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        section:before {
+            content: '🐾';
+            font-size: 4rem;
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2 {
+            margin: 0 0 1rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        form div {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #B0E0E6;
+            border-radius: 8px;
+            background-color: #fff7f8;
+            font-size: 1rem;
+        }
+
+        input[type="email"]:focus, input[type="password"]:focus {
+            outline: none;
+            border-color: #80fffb;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #ffcc00; /* Rosa mais vibrante */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f5e23bba; /* Rosa mais vibrante */
+        }
+
+        p {
+            text-align: center;
+            margin-top: 1rem;
+            color: #fdfdfd;
+        }
+
+        a {
+            color: #23afe6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #000000;
+            color: #ffffff;
+            box-shadow: 0 -2px 4px rgba(233, 232, 232, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Login</h1>
+    </header>
+    <main>
+        <section>
+<p></p>
+
+            
+            <form action="" id="loginForm">
+                <div>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="Digite seu e-mail" required>
+                </div>
+                <div>
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+            <p>Ainda não tem uma conta? <a href="signup.html">Cadastre-se</a></p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Carinhos e Caudas - Todos os direitos reservados. </p>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginForm = document.getElementById("loginForm");
+
+            loginForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                try {
+                    const response = await fetch("http://localhost:8080/api/login", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    if (response.ok) {
+                        alert("Login bem-sucedido!");
+                        window.location.href = "./index";
+                    } else {
+                        alert("E-mail ou senha incorretos. Tente novamente.");
+                    }
+                } catch (error) {
+                    console.error("Erro ao conectar ao servidor:", error);
+                    alert("Erro ao conectar ao servidor. Tente novamente mais tarde.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

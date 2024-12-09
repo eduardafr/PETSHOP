@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Pet</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #B0E0E6; /* Rosa pastel */
+            color: #000000;
+        }
+
+        header {
+            background-color: #ffcc00; /* Laranja suave */
+            color: #fbfafa;
+            text-align: center;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        section {
+            background-color: rgb(255, 255, 255);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        section:before {
+            content: '🐾';
+            font-size: 4rem;
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2 {
+            margin: 0 0 1rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        form div {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #B0E0E6;
+            border-radius: 8px;
+            background-color: #fff7f8;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #80fffb;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #ffcc00; /* Rosa mais vibrante */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f5e23bba; /* Rosa mais vibrante */
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #000000;
+            color: #ffffff;
+            box-shadow: 0 -2px 4px rgba(233, 232, 232, 0.1);
+        }
+
+        p {
+            text-align: center;
+            margin-top: 1rem;
+            color: #fdfdfd;
+        }
+
+        a {
+            color: #23afe6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Registrar Pet</h1>
+    </header>
+    <main>
+        <section>
+            <form id="cadastroPet">
+                <div>
+                    <label for="petName">Nome do Pet</label>
+                    <input type="text" id="petName" placeholder="Digite o nome do seu Pet" required>
+                </div>
+                <div>
+                    <label for="petType">Espécie</label>
+                    <select id="petType" required>
+                        <option value="" disabled selected>Selecione a espécie</option>
+                        <option value="Cachorro">Cachorro</option>
+                        <option value="Gato">Gato</option>
+                        <option value="Passaro">Passaro</option>
+                        <option value="Peixe">Peixe</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="petAge">Idade do Pet (em anos)</label>
+                    <input type="number" id="petAge" placeholder="Digite a idade do Pet" required>
+                </div>
+                <div>
+                    <label for="petWeight">Peso do Pet (em Kg)</label>
+                    <input type="number" id="petWeight" placeholder="Digite o peso do Pet" required>
+                </div>
+                <button type="submit">Cadastrar Pet</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Carinhos e Caudas - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cadastroForm = document.getElementById("cadastroPet");
+
+            cadastroForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const nomePet = document.getElementById("petName").value;
+                const tipoPet = document.getElementById("petType").value;
+                const pesoPet = document.getElementById("petWeight").value;
+                const idadePet = document.getElementById("petAge").value;
+
+                try {
+                    const response = await fetch("http://localhost:8080/api/login", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ nomePet, idadePet, pesoPet })
+                    });
+
+                    if (response.ok) {
+                        alert("Pet cadastrado com sucesso!");
+                        window.location.href = "./index";
+                    } else {
+                        alert("Erro ao cadastrar o pet. Tente novamente.");
+                    }
+                } catch (error) {
+                    console.error("Erro ao conectar ao servidor:", error);
+                    alert("Erro ao conectar ao servidor. Tente novamente mais tarde.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

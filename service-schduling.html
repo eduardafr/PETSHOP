@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento do Serviço - Petshop</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #B0E0E6; /* Azul claro pastel */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ffcc00; /* Laranja suave */
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+        }
+
+        section {
+            background-color: white;
+            padding: 1.5rem; /* Diminui o padding para reduzir o tamanho da caixa */
+            border-radius: 17px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 60%; /* Reduz a largura */
+            max-width: 400px; /* Limita a largura máxima */
+            position: relative;
+        }
+
+        section:before {
+            content: '🐾';
+            font-size: 4rem;
+            position: absolute;
+            top: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2 {
+            margin: 0 0 1rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        form div {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 2px solid #B0E0E6;
+            border-radius: 6px;
+            background-color: #fff7f8;
+            font-size: 1rem;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #80fffb;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #ffcc00; /* Laranja mais vibrante */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f5e23bba;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #000000;
+            color: #ffffff;
+            box-shadow: 0 -2px 4px rgba(233, 232, 232, 0.1);
+        }
+
+        p {
+            text-align: center;
+            margin-top: 1rem;
+            color: #fdfdfd;
+        }
+
+        a {
+            color: #23afe6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Agendamento do Serviço - Petshop</h1>
+    </header>
+    <main>
+        <section>
+            <p>
+                ㅤ
+                ㅤ
+            </p>
+            <form id="agendamentoForm">
+                <div>
+                    <label for="nomeDoPet">Nome do Pet</label>
+                    <input type="text" id="nomeDoPet" placeholder="Digite o nome do seu pet" required>
+                </div>
+                <div>
+                    <label for="nomeDoDono">Nome do Dono</label>
+                    <input type="text" id="nomeDoDono" placeholder="Digite o nome do dono" required>
+                </div>
+                <div>
+                    <label for="typeService">Tipo de Serviço</label>
+                    <select id="typeService" required>
+                        <option value="" selected disabled>Selecione o tipo de serviço</option>
+                        <option value="banho">Banho</option>
+                        <option value="tosa">Tosa</option>
+                        <option value="consulta">Consulta</option>
+                        <option value="hospedagem">Hospedagem</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="appointmentDate">Data de Agendamento</label>
+                    <input type="date" id="appointmentDate" required>
+                </div>
+                <div>
+                    <label for="appointmentTime">Hora de Agendamento</label>
+                    <input type="time" id="appointmentTime" required>
+                </div>
+                <button type="submit">Agendar Serviço</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy;2024 Petshop - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cadastroForm = document.getElementById("agendamentoForm");
+
+            cadastroForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+
+                const nomeDoPet = document.querySelector("#nomeDoPet").value;
+                const nomeDoDono = document.querySelector("#nomeDoDono").value;
+                const typeService = document.querySelector("#typeService").value;
+                const appointmentDate = document.querySelector("#appointmentDate").value;
+                const appointmentTime = document.querySelector("#appointmentTime").value;
+
+                try {
+                    const response = await fetch("http://localhost:8080/api/agendamento", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ nomeDoPet, nomeDoDono, typeService, appointmentDate, appointmentTime })
+                    });
+
+                    if (response.ok) {
+                        alert("Agendamento realizado com sucesso!");
+                        window.location.href = "./index";
+                    } else {
+                        alert("Erro ao agendar o serviço. Tente novamente.");
+                    }
+                } catch (error) {
+                    console.error("Erro ao conectar ao servidor:", error);
+                    alert("Erro ao conectar ao servidor. Tente novamente mais tarde.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

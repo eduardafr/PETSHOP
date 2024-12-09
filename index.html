@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petshop</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos Globais */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fef5e5; /* Cor de fundo amigável */
+            color: #fff;
+        }
+
+        header {
+            background-color: #ffcc00; /* Amarelo */
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+
+            i{
+                font-size: 30px;
+            }
+        }
+
+        h1 {
+            font-size: 2em; /* Tamanho aumentado para um visual mais moderno */
+            margin: 0;
+            display: inline-block;
+            margin-left: 10px;
+            font-family: 'Montserrat', sans-serif; /* Fonte cursiva para um toque fofo */
+            color: #fff;
+        
+        }
+
+        h1 i {
+            font-size: 3em; /* Aumentando o ícone para se alinhar com o título */
+            color: #fff; /* Cor do ícone */
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4); /* Efeito de sombra para destaque */
+        }
+
+        nav {
+            background-color: #5cc0df; /* Azul claro */
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        nav a:hover {
+            color: #ffcc00; /* Amarelo */
+        }
+
+        /* Carrossel */
+        .carousel {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            background-size: cover;
+            background-position: center;
+            height: 100%;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-controls button {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .carousel-controls button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #fff; /* Verde */
+            font-size: 2em;
+        }
+
+        .section-box {
+            background-color: #5cc0df;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .service-box {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            background-color: #2d608c77; /* Cor mais suave para o fundo */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .service-box:hover {
+            transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+        }
+
+        .service-box img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        footer {
+            background-color: #1C1C1C;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            bottom: 0;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <i class="fas fa-paw"></i>
+        <h1>Carinhos e Patas</h1>
+    </header>
+    
+    <nav>
+        <a href="./login.html">Login</a>
+        <a href="./singup.html">Cadastre-se</a>
+        <a href="./pet-register.html">Registrar Pet</a>
+        <a href="./service-registration.html">Serviços</a>
+        <a href="./service-schduling.html">Agendamento</a>
+    </nav>
+
+    <!-- Carrossel -->
+    <div class="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item" style="background-image: url('https://via.placeholder.com/1200x500/FF6347/FFFFFF?text=Imagem+1');">
+                <img src="Captura de tela 2024-12-09 083401.png" alt="Imagem 1">
+            </div>
+            <div class="carousel-item" style="background-image: url('https://via.placeholder.com/1200x500/FFD700/FFFFFF?text=Imagem+2');">
+                <img src="Captura de tela 2024-12-09 090150.png" alt="Imagem 2">
+            </div>
+            <div class="carousel-item" style="background-image: url('https://via.placeholder.com/1200x500/32CD32/FFFFFF?text=Imagem+3');">
+                <img src="Captura de tela 2024-12-09 091157.png" alt="Imagem 3">
+            </div>
+        </div>
+        <div class="carousel-controls">
+            <button onclick="moveCarousel('prev')">&lt;</button>
+            <button onclick="moveCarousel('next')">&gt;</button>
+        </div>
+    </div>
+
+    <main>
+        <section>
+            <div class="section-box about-container">
+                <div class="about-image">
+                    <img src="DALL·E 2024-12-09 13.31.04 - The exterior of a pet shop called 'Carinhos e Patas'. The building has a friendly and inviting appearance with bright colors, such as yellow and blue,.webp" alt="Imagem sobre nós">
+                </div>
+                <div class="about-text">
+                    <h2>Sobre nós</h2>
+                    <p>A nossa franquia de pet shops se destaca pela excelência no cuidado com os animais, oferecendo serviços especializados e uma experiência acolhedora para pets e seus tutores. Com unidades espalhadas em diversas regiões, garantimos qualidade e confiança em cada atendimento. Nosso compromisso é proporcionar saúde, conforto e bem-estar aos seus melhores amigos, enquanto expandimos nossa presença para levar esses benefícios a ainda mais lares.</p>
+                </div>
+                
+            </div>
+        </section>
+        
+        <style>
+            .about-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px; /* Espaçamento entre texto e imagem */
+            }
+
+            .about-image {
+                flex: 1;
+                max-width: 40%; /* Limita a largura da imagem */
+            }
+        
+            .about-image img {
+                width: 100%;
+                height: auto;
+                max-width: 400px; /* Define o tamanho máximo da imagem */
+                object-fit: cover; /* Ajusta a imagem para cobrir a área sem distorcer */
+            }
+        
+            .about-text {
+                flex: 1;
+                max-width: 100%;
+            }
+        
+
+        </style>
+        
+        
+
+        <section>
+            <div class="section-box">
+                <h2>Principais serviços</h2>
+                <div class="service-container">
+                    <div class="service-box">
+                        <img src="banho-e-tosa-em-gatos-1024x576.webp" alt="Banho e Tosa">
+                        <h3>Banho e Tosa</h3>
+                        <p>Cuide do visual e da higiene do seu pet com nossos serviços especializados.</p>
+                    </div>
+                    <div class="service-box">
+                        <img src="9-motivos-para-vacinar-o-seu-animal-de-estimacao.jpg" alt="Veterinário">
+                        <h3>Veterinário</h3>
+                        <p>Consultas e tratamentos para garantir a saúde do seu melhor amigo.</p>
+                    </div>
+                    <div class="service-box">
+                        <img src="PE - Funpets-00023.jpg" alt="Hospedagem">
+                        <h3>Hospedagem</h3>
+                        <p>Um lar temporário com conforto e cuidado para seu pet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentIndex = 0;
+
+        function moveCarousel(direction) {
+            const items = document.querySelectorAll('.carousel-item');
+            const totalItems = items.length;
+
+            if (direction === 'next') {
+                currentIndex = (currentIndex + 1) % totalItems;
+            } else {
+                currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+            }
+
+            const carouselInner = document.querySelector('.carousel-inner');
+            carouselInner.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+    </script>
+
+    <footer>
+        <p>&copy;2024 Carinhos e Caudas - Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
